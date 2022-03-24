@@ -4,6 +4,7 @@ import './App.css';
 import Home from './components/Home'
 import About from './components/About'
 import Packages from './components/Packages'
+import {BrowserRouter as Router, Link, Routes, Route} from "react-router-dom"
 
 
 function App() {
@@ -12,24 +13,32 @@ function App() {
 
   return (
     <div className="App">
-      <header>
+      <Router>
+       <header>
         <h1 className="title">Welcome to Monty's Mineral SPA</h1>
-
         <div className="navBar">
           <ul>
             <li>
-              <a href={<Home />}>Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href={<About />}>About Us</a>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <a href={<Packages packages={packages}/>}>Our Packages</a>
+              <Link to="/packages">Our Packages</Link>
             </li>
           </ul>
         </div>
+        </header>
 
-      </header>
+        <div className='display'>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/about" element={<About/>}/> 
+            <Route path="/packages" element={<Packages packages={packages}/>}/>
+          </Routes>  
+        </div> 
+      </Router>
     </div>
   );
 }
